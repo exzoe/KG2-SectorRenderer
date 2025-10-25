@@ -14,36 +14,27 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Testing sectors...");
+        welcomeText.setText("Сравнение нашего алгоритма с JavaFX");
 
         canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        System.out.println("Button clicked! Testing sectors...");
+        System.out.println("=== НАЧАЛО ТЕСТИРОВАНИЯ ===");
 
-        // Первая четверть (0°-90°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 100, 80, 40, 0, 90, Color.WHITE, Color.RED);
+        SectorComparison.runAllTests(canvas.getGraphicsContext2D());
 
-        // Полукруг (0°-180°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 200, 80, 40, 0, 180, Color.CYAN, Color.BLUE);
+        System.out.println("=== ТЕСТИРОВАНИЕ ЗАВЕРШЕНО ===");
+    }
 
-        // Три четверти (0°-270°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 300, 80, 40, 0, 270, Color.YELLOW, Color.GREEN);
+    @FXML
+    protected void onTestSingleButtonClick() {
+        welcomeText.setText("Тестирование отдельного сектора");
 
-        // Полный круг (0°-360°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 400, 80, 40, 0, 360, Color.PINK, Color.PURPLE);
+        canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        // Большой сектор (90°-300°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 100, 200, 40, 90, 300, Color.LIGHTYELLOW, Color.ORANGE);
-
-        // Пересекающий 0° (300°-60°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 200, 200, 40, 300, 60, Color.LIGHTCYAN, Color.DARKBLUE);
-
-        // Очень маленький сектор (0°-1°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 300, 200, 40, 0, 1, Color.LIGHTGRAY, Color.BLACK);
-
-        // Почти полный круг (0°-359°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 400, 200, 40, 0, 359, Color.LIGHTGREEN, Color.DARKGREEN);
-
-        System.out.println("All FIXED sectors drawing completed");
+        SectorComparison.drawSingleTest(
+                canvas.getGraphicsContext2D(),
+                350, 300, 60, 45, 120,
+                Color.WHITE, Color.RED, "Тестовый сектор"
+        );
     }
 }
