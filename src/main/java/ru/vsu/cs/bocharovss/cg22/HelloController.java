@@ -14,21 +14,30 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Testing circle sector...");
+        welcomeText.setText("Testing FILLED sectors with COLOR INTERPOLATION...");
 
-        System.out.println("Button clicked! Attempting to draw...");
-        System.out.println("Canvas: " + canvas);
-        System.out.println("GraphicsContext: " + canvas.getGraphicsContext2D());
-        System.out.println("PixelWriter: " + canvas.getGraphicsContext2D().getPixelWriter());
+        canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        SectorRenderer.drawCircleSector(
-                canvas.getGraphicsContext2D(),
-                160, 100, 50,
-                0, 90,
-                Color.RED
-        );
+        System.out.println("Button clicked! Testing sectors with color gradients...");
 
-        System.out.println("Drawing completed");
+        //От белого к красному (0°-90°)
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 0, 90, Color.WHITE, Color.RED);
+
+        //От голубого к синему (90°-180°)
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 90, 180, Color.CYAN, Color.BLUE);
+
+        //От желтого к зеленому (180°-270°)
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 180, 270, Color.YELLOW, Color.GREEN);
+
+        //От розового к фиолетовому (270°-360°)
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 270, 360, Color.PINK, Color.PURPLE);
+
+        // Тест 1
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 140, 35, 0, 1, Color.LIGHTYELLOW, Color.ORANGE);
+
+        // Тест 2
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 240, 140, 35, 0, 358, Color.LIGHTGRAY, Color.DARKBLUE);
+
+        System.out.println("All gradient sectors drawing completed");
     }
-
 }
