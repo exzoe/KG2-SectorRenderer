@@ -12,7 +12,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText" text="Click button to draw FILLED sectors"/>
-    <Button text="Draw Filled Sectors" onAction="#onHelloButtonClick"/>
-    <Canvas fx:id="canvas" width="320" height="240"/>
+    <Label fx:id="welcomeText" text="Click button to draw FILLED sectors with color interpolation"/>
+    <Button text="Draw Sectors" onAction="#onHelloButtonClick"/>
+    <Canvas fx:id="canvas" width="600" height="320"/>
 </VBox>
