@@ -21,22 +21,22 @@ public class HelloController {
         System.out.println("Button clicked! Testing sectors with color gradients...");
 
         //От белого к красному (0°-90°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 0, 90, Color.WHITE, Color.RED);
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 130, 100, 0, 90, Color.WHITE, Color.RED);
 
         //От голубого к синему (90°-180°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 90, 180, Color.CYAN, Color.BLUE);
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 130, 100, 90, 180, Color.CYAN, Color.BLUE);
 
         //От желтого к зеленому (180°-270°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 180, 270, Color.YELLOW, Color.GREEN);
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 130, 100, 180, 270, Color.YELLOW, Color.GREEN);
 
         //От розового к фиолетовому (270°-360°)
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 60, 35, 270, 360, Color.PINK, Color.PURPLE);
+        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 130, 100, 270, 360, Color.PINK, Color.PURPLE);
 
         // Тест 1
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 140, 35, 0, 1, Color.LIGHTYELLOW, Color.ORANGE);
+        //SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 160, 140, 35, 0, 1, Color.LIGHTYELLOW, Color.ORANGE);
 
         // Тест 2
-        SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 240, 140, 35, 0, 358, Color.LIGHTGRAY, Color.DARKBLUE);
+        //SectorRenderer.drawCircleSector(canvas.getGraphicsContext2D(), 240, 140, 35, 0, 359, Color.LIGHTGRAY, Color.DARKBLUE);
 
         System.out.println("All gradient sectors drawing completed");
     }
