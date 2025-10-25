@@ -17,7 +17,6 @@
 
     <HBox spacing="20" alignment="CENTER">
         <Button text="Запустить все тесты" onAction="#onHelloButtonClick"/>
-        <Button text="Тест одного сектора" onAction="#onTestSingleButtonClick"/>
     </HBox>
 
     <Canvas fx:id="canvas" width="1200" height="800"/>

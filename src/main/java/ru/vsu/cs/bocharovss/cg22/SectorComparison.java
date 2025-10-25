@@ -45,7 +45,6 @@ public class SectorComparison {
                 radius * 2, radius * 2,
                 startAngle, endAngle - startAngle,
                 javafx.scene.shape.ArcType.ROUND);
-
     }
 
     private static void drawLabels(
@@ -54,8 +53,6 @@ public class SectorComparison {
             String testName, double startAngle, double endAngle) {
 
         gc.setFill(Color.BLACK);
-        gc.fillText("Наш алгоритм", x - radius, y + radius + 20);
-        gc.fillText("JavaFX", x + sectorWidth + padding - radius, y + radius + 20);
 
         String angleInfo = String.format("%.0f°-%.0f°", startAngle, endAngle);
         gc.fillText(testName + " " + angleInfo, x - radius, y - radius - 5);
@@ -66,59 +63,41 @@ public class SectorComparison {
 
         int startX = 150;
         int startY = 120;
-        int radius = 40;
+        int radius = 50;
         int verticalSpacing = 150;
         int horizontalSpacing = 600;
 
         drawComparison(gc, startX, startY, radius, 0, 90,
-                Color.WHITE, Color.RED, "Первая четверть");
+                Color.WHITE, Color.RED, "1-я четверть");
 
-        drawComparison(gc, startX, startY + verticalSpacing, radius, 0, 180,
-                Color.CYAN, Color.BLUE, "Полукруг");
+        drawComparison(gc, startX, startY + verticalSpacing, radius, 90, 180,
+                Color.CYAN, Color.BLUE, "2-я четверть");
 
-        drawComparison(gc, startX, startY + verticalSpacing * 2, radius, 0, 270,
-                Color.YELLOW, Color.GREEN, "Три четверти");
+        drawComparison(gc, startX, startY + verticalSpacing * 2, radius, 180, 270,
+                Color.YELLOW, Color.GREEN, "3-я четверть");
 
-        drawComparison(gc, startX, startY + verticalSpacing * 3, radius, 0, 360,
-                Color.PINK, Color.PURPLE, "Полный круг");
+        drawComparison(gc, startX, startY + verticalSpacing * 3, radius, 270, 360,
+                Color.PINK, Color.PURPLE, "4-я четверть");
 
-        drawComparison(gc, startX + horizontalSpacing, startY, radius, 90, 300,
-                Color.LIGHTYELLOW, Color.ORANGE, "Большой сектор");
+        drawComparison(gc, startX + horizontalSpacing, startY, radius, 0, 180,
+                Color.LIGHTYELLOW, Color.ORANGE, "Полукруг");
 
-        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing, radius, 300, 60,
-                Color.LIGHTCYAN, Color.DARKBLUE, "Пересекающий 0°");
+        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing, radius, 0, 270,
+                Color.LIGHTCYAN, Color.DARKBLUE, "3/4 окружности");
 
-        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 2, radius, 0, 1,
-                Color.LIGHTGRAY, Color.BLACK, "Маленький сектор");
+        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 2, radius, 0, 359,
+                Color.LIGHTGRAY, Color.BLACK, "Полный круг");
 
-        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 3, radius, 0, 359,
-                Color.LIGHTGREEN, Color.DARKGREEN, "Почти полный круг");
+        drawComparison(gc, startX, startY + verticalSpacing * 4, radius, 45, 315,
+                Color.LIGHTGREEN, Color.DARKGREEN, "Пакман вправо");
+
+        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 3, radius, 0, 1,
+                Color.WHITE, Color.BLUE, "Маленький 1°");
+
+        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 4, radius, 0, 358,
+                Color.WHITE, Color.RED, "Почти полный круг");
 
         System.out.println("=== ВСЕ ТЕСТЫ ЗАВЕРШЕНЫ ===");
     }
 
-    public static void drawSingleTest(
-            GraphicsContext gc,
-            int x, int y, int radius,
-            double startAngle, double endAngle,
-            Color centerColor, Color edgeColor,
-            String testName) {
-
-        int padding = 50;
-        int sectorWidth = radius * 2 + padding * 2;
-        int totalWidth = sectorWidth * 2 + padding;
-
-        gc.clearRect(x - padding, y - radius - padding, totalWidth, radius * 2 + padding * 2);
-
-        SectorRenderer.drawCircleSector(gc, x, y, radius, startAngle, endAngle, centerColor, edgeColor);
-
-        drawJavaFXSector(gc, x + sectorWidth + padding, y, radius, startAngle, endAngle, centerColor, edgeColor);
-
-        gc.setFill(Color.BLACK);
-        gc.fillText("Наш алгоритм", x - radius, y + radius + 25);
-        gc.fillText("JavaFX", x + sectorWidth + padding - radius, y + radius + 25);
-
-        String angleInfo = String.format("%.0f°-%.0f°", startAngle, endAngle);
-        gc.fillText(testName + " " + angleInfo, x - radius, y - radius - 10);
-    }
 }
