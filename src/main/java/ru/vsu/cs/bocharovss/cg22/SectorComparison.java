@@ -85,7 +85,7 @@ public class SectorComparison {
         drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing, radius, 0, 270,
                 Color.LIGHTCYAN, Color.DARKBLUE, "3/4 окружности");
 
-        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 2, radius, 0, 359,
+        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 2, radius, 0, 360,
                 Color.LIGHTGRAY, Color.BLACK, "Полный круг");
 
         drawComparison(gc, startX, startY + verticalSpacing * 4, radius, 45, 315,
@@ -94,7 +94,7 @@ public class SectorComparison {
         drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 3, radius, 0, 1,
                 Color.WHITE, Color.BLUE, "Маленький 1°");
 
-        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 4, radius, 0, 358,
+        drawComparison(gc, startX + horizontalSpacing, startY + verticalSpacing * 4, radius, 0, 359,
                 Color.WHITE, Color.RED, "Почти полный круг");
 
         System.out.println("=== ВСЕ ТЕСТЫ ЗАВЕРШЕНЫ ===");

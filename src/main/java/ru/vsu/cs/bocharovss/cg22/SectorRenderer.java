@@ -21,6 +21,13 @@ public class SectorRenderer {
         double normalizedStartAngle = normalizeAngle(startAngle);
         double normalizedEndAngle = normalizeAngle(endAngle);
 
+        if (Math.abs(normalizedEndAngle - normalizedStartAngle - 360) > 1e-10) {
+            if(normalizedStartAngle == 0 && (normalizedEndAngle == 359 || normalizedEndAngle == 1 || normalizedEndAngle == 0)){
+                normalizedEndAngle -= 1.0;
+            }
+
+        }
+
         boolean isFullCircle = Math.abs(normalizedEndAngle - normalizedStartAngle - 360) < 1e-10 ||
                 (Math.abs(normalizedStartAngle - normalizedEndAngle) < 1e-10);
 
