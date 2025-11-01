@@ -24,4 +24,28 @@ public class HelloController {
         System.out.println("=== ТЕСТИРОВАНИЕ ЗАВЕРШЕНО ===");
     }
 
+    @FXML
+    protected void onCustomSectorButtonClick() {
+        CustomSectorDialog dialog = new CustomSectorDialog();
+        boolean confirmed = dialog.showDialog(canvas.getScene().getWindow());
+
+        if (confirmed) {
+            CustomSectorDialog.SectorParameters params = dialog.getParameters();
+
+            canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+            SectorRenderer.drawCircleSector(
+                    canvas.getGraphicsContext2D(),
+                    params.centerX, params.centerY, params.radius,
+                    params.startAngle, params.endAngle,
+                    params.centerColor, params.edgeColor
+            );
+
+            welcomeText.setText(String.format(
+                    "Пользовательский сектор: (%d,%d) R=%d, углы %.1f°-%.1f°",
+                    params.centerX, params.centerY, params.radius,
+                    params.startAngle, params.endAngle
+            ));
+        }
+    }
 }

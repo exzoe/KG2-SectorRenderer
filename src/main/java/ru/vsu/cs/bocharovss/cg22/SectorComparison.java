@@ -58,6 +58,28 @@ public class SectorComparison {
         gc.fillText(testName + " " + angleInfo, x - radius, y - radius - 5);
     }
 
+    public static void drawSingleComparison(
+            GraphicsContext gc,
+            int x, int y, int radius,
+            double startAngle, double endAngle,
+            Color centerColor, Color edgeColor) {
+
+        int padding = 20;
+        int sectorWidth = radius * 2 + padding * 2;
+
+        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+
+        SectorRenderer.drawCircleSector(gc, x, y, radius, startAngle, endAngle, centerColor, edgeColor);
+        drawJavaFXSector(gc, x + sectorWidth + padding, y, radius, startAngle, endAngle, centerColor, edgeColor);
+
+        gc.setFill(Color.BLACK);
+        String angleInfo = String.format("Наш алгоритм (%.0f°-%.0f°)", startAngle, endAngle);
+        gc.fillText(angleInfo, x - radius, y - radius - 5);
+
+        String javaFXInfo = String.format("JavaFX (%.0f°-%.0f°)", startAngle, endAngle);
+        gc.fillText(javaFXInfo, x + sectorWidth + padding - radius, y - radius - 5);
+    }
+
     public static void runAllTests(GraphicsContext gc) {
         System.out.println("=== ЗАПУСК ВСЕХ ТЕСТОВ СРАВНЕНИЯ ===");
 

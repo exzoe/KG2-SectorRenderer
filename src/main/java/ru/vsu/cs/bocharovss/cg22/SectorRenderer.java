@@ -49,23 +49,27 @@ public class SectorRenderer {
         double startRad = Math.toRadians(startAngle);
         double endRad = Math.toRadians(endAngle);
 
-        int x = 0;
-        int y = radius;
-        int d = 3 - 2 * radius;
+        for (int scanY = -radius; scanY <= radius; scanY++) {
+            int xLeft = Integer.MAX_VALUE;
+            int xRight = Integer.MIN_VALUE;
 
-        drawSectorOctant(pixelWriter, centerX, centerY, x, y, startRad, endRad, centerColor, edgeColor, radius);
-
-        while (y >= x) {
-            x++;
-
-            if (d > 0) {
-                y--;
-                d = d + 4 * (x - y) + 10;
-            } else {
-                d = d + 4 * x + 6;
+            for (int scanX = -radius; scanX <= radius; scanX++) {
+                if (scanX * scanX + scanY * scanY <= radius * radius) {
+                    if (isPointInSector(scanX, -scanY, startRad, endRad)) {
+                        xLeft = Math.min(xLeft, scanX);
+                        xRight = Math.max(xRight, scanX);
+                    }
+                }
             }
 
-            drawSectorOctant(pixelWriter, centerX, centerY, x, y, startRad, endRad, centerColor, edgeColor, radius);
+            if (xLeft <= xRight) {
+                for (int x = xLeft; x <= xRight; x++) {
+                    double distance = Math.sqrt(x * x + scanY * scanY);
+                    double t = Math.min(1.0, distance / radius);
+                    Color interpolatedColor = interpolateColor(centerColor, edgeColor, t);
+                    putPixel(pixelWriter, centerX + x, centerY + scanY, interpolatedColor);
+                }
+            }
         }
     }
 
@@ -85,7 +89,52 @@ public class SectorRenderer {
             int py = point[1];
 
             if (isPointInSector(px, -py, startRad, endRad)) {
-                drawRadialLine(pixelWriter, cx, cy, px, py, centerColor, edgeColor, maxRadius);
+                drawFilledLine(pixelWriter, cx, cy, px, py, startRad, endRad,
+                        centerColor, edgeColor, maxRadius);
+            }
+        }
+    }
+
+    private static void drawFilledLine(
+            PixelWriter pixelWriter,
+            int centerX, int centerY, int dx, int dy,
+            double startRad, double endRad,
+            Color centerColor, Color edgeColor, int maxRadius) {
+
+        // Используем алгоритм Брезенхема для линии от центра к точке на окружности
+        int x0 = 0, y0 = 0;
+        int x1 = dx, y1 = dy;
+
+        int dxVal = Math.abs(x1 - x0);
+        int dyVal = Math.abs(y1 - y0);
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+        int err = dxVal - dyVal;
+
+        int x = x0;
+        int y = y0;
+
+        while (true) {
+            int currentX = centerX + x;
+            int currentY = centerY + y;
+
+            if (isPointInSector(x, -y, startRad, endRad)) {
+                double distance = Math.sqrt(x * x + y * y);
+                double t = Math.min(1.0, distance / maxRadius);
+                Color interpolatedColor = interpolateColor(centerColor, edgeColor, t);
+                putPixel(pixelWriter, currentX, currentY, interpolatedColor);
+            }
+
+            if (x == x1 && y == y1) break;
+
+            int e2 = 2 * err;
+            if (e2 > -dyVal) {
+                err -= dyVal;
+                x += sx;
+            }
+            if (e2 < dxVal) {
+                err += dxVal;
+                y += sy;
             }
         }
     }
